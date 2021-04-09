@@ -67,15 +67,34 @@ class _CalculatorState extends State<Calculator> {
   }
 
   void onNewDigit(String digit) {
-    // TODO
+    input = double.parse(digit);
   }
 
   void onNewSymbol(String digit) {
-    // TODO
+    symbol = digit ;
+    previousInput = input ;
+    input = null;
   }
 
   void onEquals() {
-    // TODO
+    if(input == null || previousInput == null || symbol == null) {
+      return;
+    }
+    
+    switch(symbol) {
+      case '+' : 
+        input = previousInput! + input!;
+        break;
+      case '-' : 
+        input = previousInput! - input!;
+        break;
+      case '/' : 
+        input = previousInput! / input!;
+        break;
+      case '*' : 
+        input = previousInput! * input!;
+        break;
+    }
   }
 
   @override
