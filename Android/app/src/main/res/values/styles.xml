@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CalculatorDisplayContainer">
+        <item name="android:background">@color/display_container_background</item>
+    </style>
+
+    <style name="CalculatorInputContainer">
+        <item name="android:background">@color/input_container_background</item>
+    </style>
+</resources>
