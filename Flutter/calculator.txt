@@ -26,6 +26,7 @@ class Calculator extends StatefulWidget {
 
 class _CalculatorState extends State<Calculator> {
   static const List<List<String>> grid = <List<String>>[
+    <String>["C", "CE"],
     <String>["7", "8", "9", "-"],
     <String>["4", "5", "6", "*"],
     <String>["1", "2", "3", "/"],
@@ -50,6 +51,7 @@ class _CalculatorState extends State<Calculator> {
       case '7':
       case '8':
       case '9':
+      case 'C':
         onNewDigit(value);
         break;
       case '+':
@@ -60,14 +62,26 @@ class _CalculatorState extends State<Calculator> {
         break;
       case '=':
         onEquals();
+        break;
+      case "CE":
+        onReset();
     }
 
     // Force l'interface à se redessiner
     setState(() {});
   }
 
-  void onNewDigit(String digit) {
-    input = double.parse(digit);
+  void onNewDigit(String digit) {    
+    if(digit == 'C') {
+      input = null;
+    } else {
+      /* Write number instead of figure */
+      if(input == null) {
+        input = double.parse(digit);
+      } else {
+        input = (input! * 10) + double.parse(digit);
+      }
+    }
   }
 
   void onNewSymbol(String digit) {
@@ -89,12 +103,22 @@ class _CalculatorState extends State<Calculator> {
         input = previousInput! - input!;
         break;
       case '/' : 
-        input = previousInput! / input!;
-        break;
+        if(input == 0) {
+          return;
+        } else {
+          input = previousInput! / input!;
+          break; 
+        }
       case '*' : 
         input = previousInput! * input!;
         break;
     }
+  }
+  
+  void onReset() {
+    symbol = null;
+    input = null;
+    previousInput = null;
   }
 
   @override
