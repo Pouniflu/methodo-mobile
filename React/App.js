@@ -9,6 +9,7 @@ import React, {
  AppRegistry
  } from 'react-native';
  const inputButtons = [
+  ['C', 'CE'],
   [1, 2, 3, '/'],
   [4, 5, 6, '*'],
   [7, 8, 9, '-'],
@@ -90,8 +91,9 @@ class ReactCalculator extends Component {
               this.setState({
                   selectedSymbol: str,
                   previousInputValue: this.state.inputValue,
-                  inputValue: 0
+                  inputValue: ''
               });
+              break;
           case '=':
             let symbol = this.state.selectedSymbol,
                 inputValue = this.state.inputValue,
@@ -107,8 +109,24 @@ class ReactCalculator extends Component {
                 selectedSymbol: null
             });
             break;
+          /*
+          Dans les consignes, il est écrit que CE efface tout et que C efface le dernier élément.
+          Normalement c'est l'inverse, mais ici j'ai préféré suivre les consignes.
+          */
+          case 'CE':
+            this.setState({
+                selectedSymbol: null,
+                inputValue: 0,
+                previousInputValue: null
+            });
+            break;
+          case 'C':
+            this.setState({
+                inputValue: 0,
+            });
+            break;
       }
   }
 }
- 
+
  export default ReactCalculator
