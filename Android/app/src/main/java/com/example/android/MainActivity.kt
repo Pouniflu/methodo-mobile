@@ -73,10 +73,10 @@ class MainActivity : AppCompatActivity() {
                 "+" -> previousInput!! + input!!
                 "-" -> previousInput!! - input!!
                 "*" -> previousInput!! * input!!
-                "/" -> if((previousInput!! / input!!).isFinite()) {
-                            previousInput!! / input!!
-                        } else {
+                "/" -> if(input == 0f) {
                             "IMPOSSIBLE"
+                        } else {
+                            previousInput!! / input!!
                         }
                 else -> "ERROR"
             })
