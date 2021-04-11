@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
                     "-" -> previousCalculation = (previousInput!! - input!!)
                     "*" -> previousCalculation = (previousInput!! * input!!)
                     "/" -> previousCalculation = (previousInput!! / input!!)
-                    else -> "Holà"
+                    else -> "ERROR"
                 }
                 this.symbol = newSymbol
                 previousInput = previousCalculation
