@@ -69,8 +69,12 @@ class MainActivity : AppCompatActivity() {
                     "+" -> previousCalculation = (previousInput!! + input!!)
                     "-" -> previousCalculation = (previousInput!! - input!!)
                     "*" -> previousCalculation = (previousInput!! * input!!)
-                    "/" -> previousCalculation = (previousInput!! / input!!)
-                    else -> "ERROR"
+                    "/" -> if(input == 0f) {
+                                updateDisplayContainer("You can't divide by 0")
+                            } else {
+                                previousCalculation = (previousInput!! / input!!)
+                            }
+                     else -> "ERROR"
                 }
                 this.symbol = newSymbol
                 previousInput = previousCalculation
@@ -88,7 +92,7 @@ class MainActivity : AppCompatActivity() {
                 "-" -> previousInput!! - input!!
                 "*" -> previousInput!! * input!!
                 "/" -> if(input == 0f) {
-                            "IMPOSSIBLE"
+                            "You can't divide by 0"
                         } else {
                             previousInput!! / input!!
                         }
@@ -118,7 +122,6 @@ class MainActivity : AppCompatActivity() {
                 updateDisplayContainer(value)
             }
 
-            value == "." -> onDecimalClicked()
             value == "C" -> onDeleteClicked()
             value == "CE" -> onResetClicked()
             value == "=" -> onEqualsClicked()
