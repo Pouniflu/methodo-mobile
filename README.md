@@ -15,7 +15,7 @@
 **Flutter**
 - Q°1 (functions) : ✅
 - Q°2 (Decimals) : ❌
-- Q°3 (Division /0) : ❌
+- Q°3 (Division /0) : ✅
 - Q°4 (C / CE) : ✅
 
 ## Realization
