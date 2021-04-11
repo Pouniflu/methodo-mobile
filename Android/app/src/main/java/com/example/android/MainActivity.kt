@@ -51,6 +51,7 @@ class MainActivity : AppCompatActivity() {
 
     private var input: Float? = null
     private var previousInput: Float? = null
+    private var previousCalculation: Float? = null
     private var symbol: String? = null
 
     private fun onCellClicked(value: String) {
@@ -58,10 +59,23 @@ class MainActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.calculator_display_container).text = value.toString()
         }
 
-        fun onSymbolClicked(symbol: String) {
-            this.symbol = symbol
-            previousInput = input
-            input = null
+        fun onSymbolClicked(newSymbol: String) {
+            if (symbol == null) {
+                this.symbol = newSymbol
+                previousInput = input
+                input = null
+            } else {
+                when (symbol) {
+                    "+" -> previousCalculation = (previousInput!! + input!!)
+                    "-" -> previousCalculation = (previousInput!! - input!!)
+                    "*" -> previousCalculation = (previousInput!! * input!!)
+                    "/" -> previousCalculation = (previousInput!! / input!!)
+                    else -> "Holà"
+                }
+                this.symbol = newSymbol
+                previousInput = previousCalculation
+                input = null
+            }
         }
 
         fun onEqualsClicked() {
@@ -104,6 +118,7 @@ class MainActivity : AppCompatActivity() {
                 updateDisplayContainer(value)
             }
 
+            value == "." -> onDecimalClicked()
             value == "C" -> onDeleteClicked()
             value == "CE" -> onResetClicked()
             value == "=" -> onEqualsClicked()
@@ -113,5 +128,5 @@ class MainActivity : AppCompatActivity() {
 }
 
 fun String.isNum(): Boolean {
-    return length == 1 && isDigitsOnly()
+    return isDigitsOnly()
 }
